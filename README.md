@@ -16,12 +16,6 @@ To control the brightness of an LED using a Potentiometer and PWM (Pulse Width M
 - 10 kΩ Potentiometer
 - Jumper Wires
 
-# Circuit Diagram
-
----
-To upload
----
-
 # Procedure
 
 ## Step 1: Assemble the Circuit
@@ -68,13 +62,43 @@ To upload
 3. Record the observations.
 
 # Program
+```
+// Control LED Brightness using PWM and Potentiometer
 
----
-To upload
----
+const int potPin = A0;     // Potentiometer connected to A0
+const int ledPin = 11;      // PWM pin connected to LED
 
+int potValue = 0;
+int brightness = 0;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  // Read potentiometer value (0 to 1023)
+  potValue = analogRead(potPin);
+
+  // Convert to PWM range (0 to 255)
+  brightness = map(potValue, 0, 1023, 0, 255);
+
+  // Set LED brightness
+  analogWrite(ledPin, brightness);
+
+  // Display values on Serial Monitor
+  Serial.print("Potentiometer: ");
+  Serial.print(potValue);
+  Serial.print("  Brightness: ");
+  Serial.println(brightness);
+
+  delay(10);
+}
+```
 # Observation
 
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/0aba518c-7083-4865-9609-47a923f145ca" />
 
 # Result
 
